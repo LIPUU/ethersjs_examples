@@ -1,8 +1,8 @@
 const { ethers } = require("ethers");
+require("dotenv").config();
 
-const INFURA_ID = "b3392ed655be4f0d9345569b4cec4ce2";
 const provider = new ethers.providers.JsonRpcProvider(
-  `https://mainnet.infura.io/v3/${INFURA_ID}`
+  `https://mainnet.infura.io/v3/${process.env.INFURA_ID}`
 );
 const ERC20_ABI = [
   "function name() view returns (string)",

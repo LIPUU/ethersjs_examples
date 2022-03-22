@@ -1,15 +1,14 @@
 const { ethers } = require("ethers");
+require("dotenv").config();
 
-const INFURA_ID = "b3392ed655be4f0d9345569b4cec4ce2";
 const provider = new ethers.providers.JsonRpcProvider(
-  `https://kovan.infura.io/v3/${INFURA_ID}`
+  `https://kovan.infura.io/v3/${process.env.INFURA_ID}`
 );
 
 const account1 = "0xeb45F88e322790CA2D96305FBD9B485b2058DD0b";
 const account2 = "0xEA674fdDe714fd979de3EdF0F56AA9716B898ec8";
 
-const privateKey1 =
-  "47153ad98730018c9d10ab985d3b030684d5b4bfcba6b5dfa8ca02a371c209a1";
+const privateKey1 = process.env.PRIVATE_KEY_1;
 const wallet = new ethers.Wallet(privateKey1, provider);
 
 const main = async () => {
