@@ -1,21 +1,17 @@
 const { ethers } = require("ethers");
+require("dotenv").config();
 
-const INFURA_ID = ''
-const provider = new ethers.providers.JsonRpcProvider(`https://mainnet.infura.io/v3/${INFURA_ID}`)
+const provider = new ethers.providers.JsonRpcProvider(
+  `https://mainnet.infura.io/v3/${process.env.INFURA_ID}`
+);
 
 const main = async () => {
-    const block = await provider.getBlockNumber()
+  const latestBlock = await provider.getBlockNumber();
+  const blockInfo = await provider.getBlock(latestBlock);
 
-    console.log(`\nBlock Number: ${block}\n`)
+  const { transactions } = await provider.getBlockWithTransactions(latestBlock);
+  console.log(`first transaction in block #${blockInfo.number}:`);
+  console.log(transactions[0]);
+};
 
-    const blockInfo = await provider.getBlock(block)
-
-    console.log(blockInfo)
-
-    const { transactions } = await provider.getBlockWithTransactions(block)
-
-    console.log(`\nLogging first transaction in block:\n`)
-    console.log(transactions[0])
-}
-
-main()
+main();
